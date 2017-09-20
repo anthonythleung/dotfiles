@@ -3,20 +3,44 @@
 dotdir=$PWD
 
 # ZSH
-mkdir ~/.antigen
-curl -L git.io/antigen > ~/.antigen/antigen.zsh
-ln -s $dotdir/.zshrc $HOME/.zshrc
+if [ ! -d "$HOME/.antigen" ]; then
+  echo dirctory does not exist
+  mkdir ~/.antigen
+fi
+if [ ! -e "$HOME/.antigen/antigen.zsh" ]; then
+  curl -L git.io/antigen > ~/.antigen/antigen.zsh
+fi
+if [ ! -e "$HOME/.zshrc" ]; then
+  ln -s $dotdir/.zshrc $HOME/.zshrc
+fi
 
 # Vim
-mkdir -p ~/.vim/autoload ~/.vim/bundle && curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
-ln -s $dotdir/.vimrc $HOME/.vimrc
+if [ ! -e "$HOME/.vim/autoload/pathogen.vim" ]; then
+  mkdir -p ~/.vim/autoload ~/.vim/bundle && curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+fi
+if [ ! -e "$HOME/.vimrc" ]; then
+  ln -s $dotdir/.vimrc $HOME/.vimrc
+fi
 
 # Tmux
-git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
-ln -s $dotdir/.tmux.conf $HOME/.tmux.conf
+if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
+  git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+fi
+if [ ! -e "$HOME/.tmux.conf" ]; then
+  ln -s $dotdir/.tmux.conf $HOME/.tmux.conf
+fi
 
 # ssh
-ln -s $dotdir/ssh/config $HOME/.ssh/config
+if [ ! -e "$HOME/.ssh/config" ]; then
+  ln -s $dotdir/ssh/config $HOME/.ssh/config
+fi
 
 # Profile
-ln -s $dotdir/.profile $HOME/.profile
+if [ ! -e "$HOME/.profile" ]; then
+  ln -s $dotdir/.profile $HOME/.profile
+fi
+
+# GDB
+if [ ! -e "$HOME/.gdbinit" ]; then
+  ln -s $dotdir/.gdbinit $HOME/.gdbinit
+fi
