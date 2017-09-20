@@ -1,5 +1,5 @@
 #Antigen
-source /usr/local/share/antigen/antigen.zsh
+source ~/.antigen/antigen.zsh
 
 #OhMyZsh
 #export ZSH=/Users/anthonyleung/.oh-my-zsh
