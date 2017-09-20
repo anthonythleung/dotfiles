@@ -33,24 +33,24 @@ antigen apply
 #source $ZSH/oh-my-zsh.sh
 
 # NVM
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+#export NVM_DIR="$HOME/.nvm"
+#[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+#[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 
 # GULP Autocomplete
-eval "$(gulp --completion=zsh)" # gulp autocompletion
+#eval "$(gulp --completion=zsh)" # gulp autocompletion
 
 # Auto ls when cd
 cd() { builtin cd "$@"; l; }
 
 # Use the proper paths based on your installation
-export MYSQLXPB_PROTOBUF_INCLUDE_DIR=/usr/local/opt/protobuf/include
-export MYSQLXPB_PROTOBUF_LIB_DIR=/usr/local/opt/protobuf/lib
-export MYSQLXPB_PROTOC=/usr/local/opt/protobuf/bin/protoc
+#export MYSQLXPB_PROTOBUF_INCLUDE_DIR=/usr/local/opt/protobuf/include
+#export MYSQLXPB_PROTOBUF_LIB_DIR=/usr/local/opt/protobuf/lib
+#export MYSQLXPB_PROTOC=/usr/local/opt/protobuf/bin/protoc
 
 # ssh alias
-alias dev="cd ~/Documents/Projects/dev-vagrant/ > /dev/null && vagrant up > /dev/null && vagrant ssh"
+#alias dev="cd ~/Documents/Projects/dev-vagrant/ > /dev/null && vagrant up > /dev/null && vagrant ssh"
 
 # Auto start tmux
 [ -z "$TMUX"  ] && { tmux attach 2> /dev/null || exec tmux new-session && exit;}
