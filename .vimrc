@@ -1,8 +1,25 @@
-" Pathogen
-execute pathogen#infect()
+" vim-plug
+call plug#begin('~/.vim/plugged')
 
+Plug 'arcticicestudio/nord-vim'
+
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+
+Plug 'sjl/gundo.vim'
+
+Plug 'airblade/vim-gitgutter'
+
+Plug 'pangloss/vim-javascript'
+
+
+call plug#end()
 " Color Theme
 colorscheme nord
+let g:airline_powerline_fonts = 1
 
 " Basic Config
 syntax enable
@@ -40,3 +57,15 @@ inoremap jk <esc> " escape key
 nnoremap <leader>u :GundoToggle<CR>
 " save session
 nnoremap <leader>s :mksession<CR>
+" nerd tree
+nnoremap <Leader>f :NERDTreeToggle<Enter>
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
+" remap pane key
+nnoremap <Leader>j <C-W><C-J>
+nnoremap <Leader>k <C-W><C-K>
+nnoremap <Leader>l <C-W><C-L>
+nnoremap <Leader>h <C-W><C-H>

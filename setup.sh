@@ -15,12 +15,15 @@ if [ ! -e "$HOME/.zshrc" ]; then
 fi
 
 # Vim
-if [ ! -e "$HOME/.vim/autoload/pathogen.vim" ]; then
-  mkdir -p ~/.vim/autoload ~/.vim/bundle && curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim
+if [ ! -e "$HOME/.vim/autoload/plug.vim" ]; then
+  # Vim Plug
+  curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
 if [ ! -e "$HOME/.vimrc" ]; then
   ln -s $dotdir/.vimrc $HOME/.vimrc
 fi
+
+vim +PlugInstall +qall
 
 # Tmux
 if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
