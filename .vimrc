@@ -15,6 +15,19 @@ Plug 'airblade/vim-gitgutter'
 
 Plug 'pangloss/vim-javascript'
 
+Plug 'rust-lang/rust.vim'
+
+Plug 'scrooloose/nerdcommenter'
+
+Plug 'scrooloose/syntastic'
+
+Plug 'godlygeek/tabular'
+
+" vim snippets
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'tomtom/tlib_vim'
+Plug 'garbas/vim-snipmate'
+Plug 'honza/vim-snippets'
 
 call plug#end()
 " Color Theme
@@ -36,7 +49,8 @@ set showmatch " highlight matching parenthesis
 set incsearch " search as characters are entered
 set hlsearch  " highlight matches
 set mouse=a " enable mouse for all mode
-
+set noshowmode " hide status bar for airline
+set clipboard=unnamed " yank and paste with the system clipboard
 " Movement
 " move vertically by visual line
 nnoremap j gj
@@ -64,6 +78,9 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
+" nerdcommenter
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
 " remap pane key
 nnoremap <Leader>j <C-W><C-J>
 nnoremap <Leader>k <C-W><C-K>
