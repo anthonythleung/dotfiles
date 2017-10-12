@@ -95,6 +95,7 @@ let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_markdown_mdl_args = "-r '~MD013,~MD029'"
+let g:syntastic_cpp_compiler_options = "-std=c++14"
 
 " vim snippets
 let g:UltiSnipsExpandTrigger="<tab>"
