@@ -19,7 +19,7 @@ Plug 'rust-lang/rust.vim'
 
 Plug 'scrooloose/nerdcommenter'
 
-Plug 'scrooloose/syntastic'
+Plug 'w0rp/ale'
 
 Plug 'godlygeek/tabular'
 
@@ -85,17 +85,12 @@ let NERDTreeDirArrows = 1
 " Add spaces after comment delimiters by default
 let g:NERDSpaceDelims = 1
 
-" Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_markdown_mdl_args = "-r '~MD013,~MD029'"
-let g:syntastic_cpp_compiler_options = "-std=c++14"
+" ale
+let g:airline#extensions#ale#enabled = 1
+let g:ale_cpp_gcc_options = "-std=c++14 -Wall -g"
+let g:ale_linters = {
+      \   'cpp': ['g++'],
+      \}
 
 " vim snippets
 let g:UltiSnipsExpandTrigger="<tab>"
