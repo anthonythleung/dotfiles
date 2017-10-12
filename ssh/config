@@ -1,8 +1,8 @@
-Host *
- AddKeysToAgent yes
- UseKeychain yes
- IdentityFile ~/.ssh/id_rsa
+#Host *
+# AddKeysToAgent yes
+# UseKeychain yes
+# IdentityFile ~/.ssh/id_rsa
 
-Host school
-  User th4leung
-  Hostname linux.student.cs.uwaterloo.ca
+#Host school
+#  User th4leung
+#  Hostname linux.student.cs.uwaterloo.ca
