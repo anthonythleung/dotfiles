@@ -10,6 +10,7 @@ antigen bundle git
 antigen bundle pip
 antigen bundle command-not-found
 antigen bundle vagrant
+antigen bundle tmux
 
 # Syntax highlighting bundle.
 antigen bundle zsh-users/zsh-syntax-highlighting
@@ -28,7 +29,7 @@ antigen apply
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-#ZSH_THEME="norm"
+#SH_THEME="norm"
 
 #source $ZSH/oh-my-zsh.sh
 
@@ -53,4 +54,11 @@ cd() { builtin cd "$@"; l; }
 #alias dev="cd ~/Documents/Projects/dev-vagrant/ > /dev/null && vagrant up > /dev/null && vagrant ssh"
 
 # Auto start tmux
-[ -z "$TMUX"  ] && { tmux attach 2> /dev/null || exec tmux new-session && exit;}
+ # [ -z "$TMUX"  ] && { tmux attach 2> /dev/null || exec tmux new-session && exit;}
+
+# markdown alis
+alias mdhtml="sh /Users/anthonyleung/Dropbox/University\ of\ Waterloo/Pandoc/pandoc.sh"
+alias schoolSTFP="sshfs th4leung@linux.student.cs.uwaterloo.ca:/u0/th4leung ~/SchoolSFTP -o defer_permissions -o volname=School"
+
+# Virtualenv python3
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
