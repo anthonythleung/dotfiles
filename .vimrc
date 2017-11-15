@@ -24,7 +24,6 @@ Plug 'w0rp/ale'
 Plug 'godlygeek/tabular'
 
 Plug 'plasticboy/vim-markdown'
-Plug 'lervag/vimtex'
 
 " vim snippets
 Plug 'SirVer/ultisnips'
@@ -54,7 +53,7 @@ set noshowmode " hide status bar for airline
 set clipboard=unnamed " yank and paste with the system clipboard
 set scrolloff=10 " leave 10 lines above and below the cursor
 set backspace=indent,eol,start " fix backspace
-set conceallevel=2 " set conceal level for markdown
+
 " Movement
 " move vertically by visual line
 nnoremap j gj
@@ -121,7 +120,7 @@ augroup END
 map <leader>ss :setlocal spell!<cr>
 
 " markdown
-let g:vim_markdown_folding_style_pythonic = 1
+let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_math = 1
 let g:vim_markdown_new_list_item_indent = 2
 let g:vim_markdown_toc_autofit = 1
