@@ -91,6 +91,7 @@ let g:NERDSpaceDelims = 1
 
 " ale
 let g:airline#extensions#ale#enabled = 1
+let g:ale_sign_column_always = 1
 let g:ale_cpp_gcc_options = "-std=c++14 -Wall -g"
 let g:ale_linters = {
       \   'cpp': ['g++'],
