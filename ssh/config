@@ -5,4 +5,17 @@ Host *
 
 Host school
   User th4leung
-  Hostname linux.student.cs.uwaterloo.ca
+  Hostname ubuntu1604-006.student.cs.uwaterloo.ca
+
+Host dev
+  HostName 127.0.0.1
+  User ubuntu
+  Port 2222
+  UserKnownHostsFile /dev/null
+  StrictHostKeyChecking no
+  PasswordAuthentication no
+  IdentityFile /Users/anthonyleung/Documents/Projects/dev-vagrant/.ssh/id_rsa
+  IdentitiesOnly yes
+  LogLevel FATAL
+  ForwardAgent yes
+  ForwardX11 yes

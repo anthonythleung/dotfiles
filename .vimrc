@@ -29,6 +29,8 @@ Plug 'plasticboy/vim-markdown'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 
+Plug 'junegunn/goyo.vim'
+
 call plug#end()
 " Color Theme
 colorscheme nord
@@ -53,6 +55,8 @@ set noshowmode " hide status bar for airline
 set clipboard=unnamed " yank and paste with the system clipboard
 set scrolloff=10 " leave 10 lines above and below the cursor
 set backspace=indent,eol,start " fix backspace
+set splitright " fix split
+set splitbelow " fix split
 
 " Movement
 " move vertically by visual line
@@ -125,3 +129,6 @@ let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_math = 1
 let g:vim_markdown_new_list_item_indent = 2
 let g:vim_markdown_toc_autofit = 1
+
+" goyo
+let g:goyo_width = 120

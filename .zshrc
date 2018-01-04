@@ -62,3 +62,6 @@ alias schoolSTFP="sshfs th4leung@linux.student.cs.uwaterloo.ca:/u0/th4leung ~/Sc
 
 # Virtualenv python3
 export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+
+# backup alias
+alias backup="restic -r /Volumes/Anthony/backup backup ~/Documents/Projects ~/Library/Containers/net.shinyfrog.bear/Data/Library/Application\ Support/net.shinyfrog.bear/"
