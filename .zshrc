@@ -14,6 +14,7 @@ antigen bundle tmux
 
 # Syntax highlighting bundle.
 antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle zsh-users/zsh-autosuggestions
 
 # Load the theme.
 # Pure Theme
@@ -65,3 +66,7 @@ export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
 
 # backup alias
 alias backup="restic -r /Volumes/Anthony\ External\ Storage/backup/restic backup ~/Documents/Projects"
+
+export GOPATH=$HOME/Documents/Projects/go
+export PATH=$PATH:$(go env GOPATH)/bin
+alias vim="nvim"
