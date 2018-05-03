@@ -47,3 +47,17 @@ fi
 if [ ! -e "$HOME/.gdbinit" ]; then
   ln -s $dotdir/.gdbinit $HOME/.gdbinit
 fi
+
+# KeyMaps
+
+if [ -e "$HOME/Documents/Projects/qmk_firmware"]; then
+  if [ ! -e "$HOME/Documents/Projects/qmk_firmware/keyboards/nyquist/keymaps/anthony"]; then
+    mkdir $HOME/Documents/Projects/qmk_firmware/keyboards/nyquist/keymaps/anthony
+  fi
+  ln -s $dotdir/keymaps/nyquist/* $HOME/Documents/Projects/qmk_firmware/keyboards/nyquist/keymaps/anthony
+
+  if [ ! -e "$HOME/Documents/Projects/qmk_firmware/keyboards/tada68/keymaps/anthony"]; then
+    mkdir $HOME/Documents/Projects/qmk_firmware/keyboards/tada68/keymaps/anthony
+  fi
+  ln -s $dotdir/keymaps/tada68/* $HOME/Documents/Projects/qmk_firmware/keyboards/tada68/keymaps/anthony
+fi

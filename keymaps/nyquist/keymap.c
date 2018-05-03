@@ -12,12 +12,14 @@ extern keymap_config_t keymap_config;
 #define _LOWER 1
 #define _RAISE 2
 #define _FN 3
+#define _PLOVER 4
 
 enum custom_keycodes {
   QWERTY = SAFE_RANGE,
   LOWER,
   RAISE,
   FN,
+  PLOVER,
   RED,
   GREEN,
   BLUE,
@@ -36,23 +38,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Qwerty
  * ,-----------------------------------------------------------------------------------.
- * |   `  |   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  | Del  |
+ * |   1  |   2  |   3  |   4  |   5  |   `  | Del  |   6  |   7  |   8  |   9  |   0  |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * | Tab  |   Q  |   W  |   E  |   R  |   T  |   Y  |   U  |   I  |   O  |   P  | Bspc |
+ * |   Q  |   W  |   E  |   R  |   T  | Tab  | Bspc |   Y  |   U  |   I  |   O  |   P  |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * | Ctrl |   A  |   S  |   D  |   F  |   G  |   H  |   J  |   K  |   L  |   ;  |  '   |
+ * |   A  |   S  |   D  |   F  |   G  | Ctrl |  '   |   H  |   J  |   K  |   L  |   ;  |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * | Shift|   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  |Enter |
+ * |   Z  |   X  |   C  |   V  |   B  | Shift|Enter |   N  |   M  |   ,  |   .  |   /  |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |  Fn  | Ctrl | GUI  | Alt  |Lower |Space |Space |Raise | Left | Down |  Up  |Right |
+ * | Ctrl | GUI  | Alt  |Lower |Space |  Fn  |Space |Raise | Left | Down |  Up  |Right |
  * `-----------------------------------------------------------------------------------'
  */
 [_QWERTY] = KEYMAP( \
-  KC_GESC, KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_DEL,  \
-  KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC, \
-  KC_LCTL, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, \
-  KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT,  \
-  FN,      KC_LCTL, KC_LGUI, KC_LALT, LOWER,   KC_SPACE,KC_SPACE,RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT  \
+  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_GESC, KC_DEL,  KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    \
+  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_TAB,  KC_BSPC, KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    \
+  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_LCTL, KC_QUOT, KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, \
+  KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_LSFT, KC_ENT,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, \
+  KC_LCTL, KC_LGUI, KC_LALT, LOWER,   KC_SPACE,FN,      KC_SPACE,RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT  \
 ),
 
 /* Raise 
@@ -86,7 +88,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * | Shift|      |      |      |      |      |Sens 0|Sens 1|Sens 2|      |      |Enter |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |  Fn  | Ctrl | GUI  | Alt  |Lower |Space |   0  | Raise| Left | Down |  Up  | Right|
+ * |  Fn  | Ctrl | GUI  | Alt  |Lower |Space | Space| Raise| Left | Down |  Up  | Right|
  * `-----------------------------------------------------------------------------------'
  */
 [_LOWER] = KEYMAP( \
@@ -94,7 +96,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   KC_TAB,  KC_PGUP, XXXXXXX, KC_UP,   XXXXXXX, KC_HOME, XXXXXXX, KC_BTN1, KC_BTN2, XXXXXXX, XXXXXXX, KC_BSLS, \
   KC_CAPS, KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_END,  KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, XXXXXXX, XXXXXXX, \
   KC_LSFT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_ACL0, KC_ACL1, KC_ACL2, XXXXXXX, XXXXXXX, XXXXXXX, KC_ENT,  \
-  XXXXXXX, KC_LCTL, KC_LGUI, KC_LALT, LOWER,   KC_SPC,  KC_0,    RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT  \
+  XXXXXXX, KC_LCTL, KC_LGUI, KC_LALT, LOWER,   KC_SPC,  KC_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT  \
 ),
 
 /* FN
@@ -107,7 +109,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * |      |      |      |      | TEAL |YELLOW|      |      |      |      |      |      |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |  FN  |      |RGB SW|RGB SN|RGB KN|RGB XM|RGB PL|RGB RB|RGB BR|RGB GR|      |RESET |
+ * |  FN  |PLOVER|RGB SW|RGB SN|RGB KN|RGB XM|RGB PL|RGB RB|RGB BR|RGB GR|      |RESET |
  * `-----------------------------------------------------------------------------------'
  */
 [_FN] =  KEYMAP( \
@@ -116,6 +118,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   XXXXXXX, KC_MRWD, KC_MPLY, KC_MFFD, BLUE,    PURPLE,  RGB_TOG, RGB_MOD, RGB_VAI, RGB_VAD, XXXXXXX, KC_PSCR, \
   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, TEAL,    YELLOW,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
   FN,      XXXXXXX, RGB_M_SW,RGB_M_SN,RGB_M_K, RGB_M_X, RGB_M_P, RGB_M_R, RGB_M_B, RGB_M_G, XXXXXXX, RESET    \
+),
+
+/* Plover
+ * ,-----------------------------------------------------------------------------------.
+ * |      |      |      |      |      |      |      |      |      |      |      |      |
+ * |------+------+------+------+------+------|------+------+------+------+------+------|
+ * |      |   S  |   T  |   P  |   H  |   *  |  *   |  F   |  P   |  L   |  T   |  D   |
+ * |------+------+------+------+------+------|------+------+------+------+------+------|
+ * |      |   S  |   K  |   W  |   R  |   *  |  *   |  R   |  B   |  G   |  S   |  Z   |
+ * |------+------+------+------+------+------|------+------+------+------+------+------|
+ * |      |      |      |      |      |      |      |      |      |      |      |      |
+ * |------+------+------+------+------+------|------+------+------+------+------+------|
+ * | Exit |      |      |      |      |      |      |      |      |      |      |      |
+ * `-----------------------------------------------------------------------------------'
+ */
+[_PLOVER] =  KEYMAP( \
+  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
+  XXXXXXX, KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, \
+  XXXXXXX, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, \
+  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
+  TO(_QWERTY), XXXXXXX, XXXXXXX, XXXXXXX, KC_C,    KC_V,    KC_N,    KC_M,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX  \
 )
 
 };
