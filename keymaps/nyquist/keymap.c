@@ -1,6 +1,4 @@
-#include "nyquist.h"
-#include "action_layer.h"
-#include "eeconfig.h"
+#include QMK_KEYBOARD_H
 
 extern keymap_config_t keymap_config;
 
@@ -12,21 +10,22 @@ extern keymap_config_t keymap_config;
 #define _LOWER 1
 #define _RAISE 2
 #define _FN 3
-#define _PLOVER 4
 
 enum custom_keycodes {
   QWERTY = SAFE_RANGE,
   LOWER,
   RAISE,
   FN,
-  PLOVER,
   RED,
   GREEN,
   BLUE,
   PURPLE,
   TEAL,
-  YELLOW 
+  YELLOW,
+  DYNAMIC_MACRO_RANGE
 };
+
+#include "dynamic_macro.h"
 
 const uint8_t RGBLED_RAINBOW_SWIRL_INTERVALS[] PROGMEM = {20, 10, 5};
 
@@ -38,23 +37,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 /* Qwerty
  * ,-----------------------------------------------------------------------------------.
- * |   1  |   2  |   3  |   4  |   5  |   `  | Del  |   6  |   7  |   8  |   9  |   0  |
+ * | ESC  |   1  |   2  |   3  |   4  |   5  |   6  |   7  |   8  |   9  |   0  | Del  |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |   Q  |   W  |   E  |   R  |   T  | Tab  | Bspc |   Y  |   U  |   I  |   O  |   P  |
+ * | Tab  |   Q  |   W  |   E  |   R  |   T  |   Y  |   U  |   I  |   O  |   P  | Bspc |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |   A  |   S  |   D  |   F  |   G  | Ctrl |  '   |   H  |   J  |   K  |   L  |   ;  |
+ * | Ctrl |   A  |   S  |   D  |   F  |   G  |   H  |   J  |   K  |   L  |   ;  |  '   |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |   Z  |   X  |   C  |   V  |   B  | Shift|Enter |   N  |   M  |   ,  |   .  |   /  |
+ * | Shift|   Z  |   X  |   C  |   V  |   B  |   N  |   M  |   ,  |   .  |   /  |Enter |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * | Ctrl | GUI  | Alt  |Lower |Space |  Fn  |Space |Raise | Left | Down |  Up  |Right |
+ * |  Fn  | Ctrl | GUI  | Alt  |Lower |Space |Space |Raise | Left | Down |  Up  |Right |
  * `-----------------------------------------------------------------------------------'
  */
-[_QWERTY] = KEYMAP( \
-  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_GESC, KC_DEL,  KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    \
-  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_TAB,  KC_BSPC, KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    \
-  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_LCTL, KC_QUOT, KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, \
-  KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_LSFT, KC_ENT,  KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, \
-  KC_LCTL, KC_LGUI, KC_LALT, LOWER,   KC_SPACE,FN,      KC_SPACE,RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT  \
+[_QWERTY] = LAYOUT( \
+  KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_DEL,  \
+  KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC, \
+  KC_LCTL, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, \
+  KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_ENT,  \
+  FN,      KC_LCTL, KC_LGUI, KC_LALT, LOWER,   KC_SPACE,KC_SPACE,RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT  \
 ),
 
 /* Raise 
@@ -70,8 +69,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * |  Fn  | Ctrl | GUI  | Alt  |Lower |Space | Space| Raise| Left | Down |  Up  | Right|
  * `-----------------------------------------------------------------------------------'
  */
-[_RAISE] = KEYMAP( \
-  KC_GESC, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_BSPC, \
+[_RAISE] = LAYOUT( \
+  KC_GRV,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_BSPC, \
   KC_TAB,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_BSLS, \
   KC_CAPS, KC_LT,   KC_GT,   KC_LCBR, KC_LBRC, KC_GRV,  KC_PIPE, KC_RBRC, KC_RCBR, KC_MINS, KC_EQL,  XXXXXXX, \
   KC_LSFT, KC_LT,   KC_GT,   KC_LCBR, KC_LBRC, KC_GRV,  KC_PIPE, KC_RBRC, KC_RCBR, KC_MINS, KC_EQL,  KC_ENT,  \
@@ -82,65 +81,43 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  * ---------------------------------------------------------------------------------.
  * |   `  |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |  F7  |  F8  |  F9  | F10  | Bksp |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * | Tab  | PgU  |      |  Up  |      | Home |      |LClick|RClick|      |      |  \   |
+ * | Tab  | PgU  |      |  Up  |      | Home |  7   |  8   |  9   |  +   |  *   |  \   |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * | CAPS | PgD  | Left | Down | Right| End  |  MsL | MsDn | MsUp | MsR  |      |      |
+ * | CAPS | PgD  | Left | Down | Right| End  |  4   |  5   |  6   |  -   |  /   |      |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * | Shift|      |      |      |      |      |Sens 0|Sens 1|Sens 2|      |      |Enter |
+ * | Shift|      |      |      |      |      |  1   |  2   |  3   |  =   |      |Enter |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |  Fn  | Ctrl | GUI  | Alt  |Lower |Space | Space| Raise| Left | Down |  Up  | Right|
+ * |  Fn  | Ctrl | GUI  | Alt  |Lower |Space |  0   |  .   | Left | Down |  Up  | Right|
  * `-----------------------------------------------------------------------------------'
  */
-[_LOWER] = KEYMAP( \
-  KC_GESC, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_BSPC, \
-  KC_TAB,  KC_PGUP, XXXXXXX, KC_UP,   XXXXXXX, KC_HOME, XXXXXXX, KC_BTN1, KC_BTN2, XXXXXXX, XXXXXXX, KC_BSLS, \
-  KC_CAPS, KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_END,  KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, XXXXXXX, XXXXXXX, \
-  KC_LSFT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_ACL0, KC_ACL1, KC_ACL2, XXXXXXX, XXXXXXX, XXXXXXX, KC_ENT,  \
-  XXXXXXX, KC_LCTL, KC_LGUI, KC_LALT, LOWER,   KC_SPC,  KC_SPC,  RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT  \
+[_LOWER] = LAYOUT( \
+  KC_GRV,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_BSPC, \
+  KC_TAB,  KC_PGUP, XXXXXXX, KC_UP,   XXXXXXX, KC_HOME, KC_P7,   KC_P8,   KC_P9,   KC_PPLS, KC_PAST, KC_BSLS, \
+  KC_CAPS, KC_PGDN, KC_LEFT, KC_DOWN, KC_RGHT, KC_END,  KC_P4,   KC_P5,   KC_P6,   KC_PMNS, KC_PSLS, XXXXXXX, \
+  KC_LSFT, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_ACL0, KC_P1,   KC_P2,   KC_P3,   KC_PENT, XXXXXXX, KC_ENT,  \
+  XXXXXXX, KC_LCTL, KC_LGUI, KC_LALT, LOWER,   KC_SPC,  KC_P0,   KC_PDOT, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT  \
 ),
 
 /* FN
  * ,-----------------------------------------------------------------------------------.
- * |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |  F7  |  F8  |  F9  |  F10 |  F11 |  F12 |
+ * |      |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |  F7  |  F8  |  F9  |  F10 |      |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * |      | Vol- | Mute | Vol+ | RED  |GREEN |Hue Up|Hue Dn|Sat Up|Sat Dn|      | LOCK |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
  * |      | Prev | Play | Next | BLUE |PURPLE|RGB Tg|RGB Md|Val Up|Val Dn|      | PRTN |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |      |      |      |      | TEAL |YELLOW|      |      |      |      |      |      |
+ * |      | Rec  | Stop |Macro1| TEAL |YELLOW|      |      |      |      |      |      |
  * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |  FN  |PLOVER|RGB SW|RGB SN|RGB KN|RGB XM|RGB PL|RGB RB|RGB BR|RGB GR|      |RESET |
+ * |  FN  |      |RGB SW|RGB SN|RGB KN|RGB XM|RGB PL|RGB RB|RGB BR|RGB GR|      |RESET |
  * `-----------------------------------------------------------------------------------'
  */
-[_FN] =  KEYMAP( \
-  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  \
+[_FN] =  LAYOUT( \
+  XXXXXXX, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  XXXXXXX, \
   XXXXXXX, KC_VOLD, KC_MUTE, KC_VOLU, RED,     GREEN,   RGB_HUD, RGB_HUI, RGB_SAD, RGB_SAI, XXXXXXX, XXXXXXX, \
   XXXXXXX, KC_MRWD, KC_MPLY, KC_MFFD, BLUE,    PURPLE,  RGB_TOG, RGB_MOD, RGB_VAI, RGB_VAD, XXXXXXX, KC_PSCR, \
-  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, TEAL,    YELLOW,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
+  XXXXXXX, DYN_REC_START1, DYN_REC_STOP, DYN_MACRO_PLAY1, TEAL,    YELLOW,  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
   FN,      XXXXXXX, RGB_M_SW,RGB_M_SN,RGB_M_K, RGB_M_X, RGB_M_P, RGB_M_R, RGB_M_B, RGB_M_G, XXXXXXX, RESET    \
-),
-
-/* Plover
- * ,-----------------------------------------------------------------------------------.
- * |      |      |      |      |      |      |      |      |      |      |      |      |
- * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |      |   S  |   T  |   P  |   H  |   *  |  *   |  F   |  P   |  L   |  T   |  D   |
- * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |      |   S  |   K  |   W  |   R  |   *  |  *   |  R   |  B   |  G   |  S   |  Z   |
- * |------+------+------+------+------+------|------+------+------+------+------+------|
- * |      |      |      |      |      |      |      |      |      |      |      |      |
- * |------+------+------+------+------+------|------+------+------+------+------+------|
- * | Exit |      |      |      |      |      |      |      |      |      |      |      |
- * `-----------------------------------------------------------------------------------'
- */
-[_PLOVER] =  KEYMAP( \
-  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
-  XXXXXXX, KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_LBRC, \
-  XXXXXXX, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, KC_QUOT, \
-  XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
-  TO(_QWERTY), XXXXXXX, XXXXXXX, XXXXXXX, KC_C,    KC_V,    KC_N,    KC_M,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX  \
 )
-
 };
 
 #ifdef AUDIO_ENABLE
@@ -164,6 +141,9 @@ void persistent_default_layer_set(uint16_t default_layer) {
 #define rgblight_set_black       rgblight_sethsv (0x00,  0x00, 0x00);
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  if (!process_record_dynamic_macro(keycode, record)) {
+    return false;
+  }
   switch (keycode) {
     case QWERTY:
       if (record->event.pressed) {
