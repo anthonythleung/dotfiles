@@ -1,4 +1,4 @@
-#!/bin/bash
+# !/bin/bash
 
 dotdir=$PWD
 
@@ -34,7 +34,6 @@ if [ ! -e "$HOME/.gdbinit" ]; then
 fi
 
 # KeyMaps
-
 if [ -e "$HOME/Documents/Projects/qmk_firmware"]; then
   if [ ! -e "$HOME/Documents/Projects/qmk_firmware/keyboards/nyquist/keymaps/anthony"]; then
     mkdir $HOME/Documents/Projects/qmk_firmware/keyboards/nyquist/keymaps/anthony
@@ -45,4 +44,24 @@ if [ -e "$HOME/Documents/Projects/qmk_firmware"]; then
     mkdir $HOME/Documents/Projects/qmk_firmware/keyboards/tada68/keymaps/anthony
   fi
   ln -s $dotdir/keymaps/tada68/* $HOME/Documents/Projects/qmk_firmware/keyboards/tada68/keymaps/anthony
+fi
+
+# FISH
+if [ ! -d "$HOME/.config/fish" ]; then
+  mkdir $HOME/.config/fish
+fi
+if [ ! -d "$HOME/.config/fish/functions" ]; then
+  mkdir $HOME/.config/fish/functions
+fi
+if [ ! -e "$HOME/.config/fish/config.fish" ]; then
+  ln -s "$dotdir/fish/config.fish" "$HOME/.config/fish/config.fish"
+fi
+if [ ! -e "$HOME/.config/fish/aliases.fish" ]; then
+  ln -s "$dotdir/fish/aliases.fish" "$HOME/.config/fish/aliases.fish"
+fi
+if [ ! -e "$HOME/.config/fish/functions/dev_ubuntu.fish" ]; then
+  ln -s "$dotdir/fish/functions/dev_ubuntu.fish" "$HOME/.config/fish/functions/dev_ubuntu.fish"
+fi
+if [ ! -e "$HOME/.config/fish/functions/fish_prompt.fish" ]; then
+  ln -s "$dotdir/fish/functions/fish_prompt.fish" "$HOME/.config/fish/functions/fish_prompt.fish"
 fi
