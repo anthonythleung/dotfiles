@@ -2,28 +2,18 @@
 
 dotdir=$PWD
 
-# ZSH
-if [ ! -d "$HOME/.antigen" ]; then
-  echo dirctory does not exist
-  mkdir ~/.antigen
+# NVim
+if [ ! -d "$HOME/.config/nvim/init.vim" ]; then
+  mkdir $HOME/.config
+  mkdir $HOME/.config/nvim
+  ln -s $HOME/$dotdir/nvim/init.vim /home/vagrant/.config/nvim/init.vim
 fi
-if [ ! -e "$HOME/.antigen/antigen.zsh" ]; then
-  curl -L git.io/antigen > ~/.antigen/antigen.zsh
+# Vim Plug
+if [ ! -e "$HOME/.local/share/nvim/site/autoload/plug.vim" ]; then
+  curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 fi
-if [ ! -e "$HOME/.zshrc" ]; then
-  ln -s $dotdir/.zshrc $HOME/.zshrc
-fi
-
-# Vim
-if [ ! -e "$HOME/.vim/autoload/plug.vim" ]; then
-  # Vim Plug
-  curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-fi
-if [ ! -e "$HOME/.vimrc" ]; then
-  ln -s $dotdir/.vimrc $HOME/.vimrc
-fi
-
-vim +PlugInstall +qall
+nvim +PlugInstall +qall
 
 # Tmux
 if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
@@ -36,11 +26,6 @@ fi
 # ssh
 if [ ! -e "$HOME/.ssh/config" ]; then
   ln -s $dotdir/ssh/config $HOME/.ssh/config
-fi
-
-# Profile
-if [ ! -e "$HOME/.profile" ]; then
-  ln -s $dotdir/.profile $HOME/.profile
 fi
 
 # GDB
